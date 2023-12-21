@@ -88,7 +88,7 @@ const list = [
     id: 7,
     title: "RSI Constellation Andromeda",
     category: "Gunship",
-    price: 249,
+    price: 240,
     img: "https://media.starcitizen.tools/thumb/webp/d/d7/Andromeda_flying_from_Station_-_Front_Starboard.jpg/800px-Andromeda_flying_from_Station_-_Front_Starboard.webp",
     desc: `Missile boat with good turrets placement and a ship-launched fighter.`,
     wiki: `https://starcitizen.tools/Constellation_Andromeda`,
@@ -127,13 +127,21 @@ const list = [
     con: "Due to the 'rule of cool' design, it has abysmal cross-section without shield or hull to compensate.",
   },
 ];
+const videoList = [
+  {
+    id: "C0ZnTYDLwo0",
+    autoplay: 1,
+  },
+];
 // DOM elements
 const sectionCenter = document.querySelector(".section-center");
 const btnContainer = document.querySelector(".btn-container");
+const sectionVideo = document.querySelector(".section-video");
 // load items
 window.addEventListener("DOMContentLoaded", () => {
   displayListItems(list);
   displayFilterBtns();
+  videoPlayer(videoList);
 });
 // ListItemsFunction
 function displayListItems(listItems) {
@@ -205,8 +213,6 @@ function displayListItems(listItems) {
     }
   })
 }
-
-
 // FilterBtns Function
 function displayFilterBtns() {
   // auto filter creation
@@ -247,4 +253,17 @@ function displayFilterBtns() {
       }
     })
   })
+}
+// Video function
+function videoPlayer(videoID) {
+  const playerList = videoID.map((videoInfo) => (
+    `<div class="video-container">
+    <iframe class="video-player"
+      src="https://www.youtube.com/embed/${videoInfo.id}?playlist=${videoInfo.id}&autoplay=${videoInfo.autoplay}&mute=${videoInfo.autoplay}&showinfo=0&loop=1&controls=0&rel=0"
+      title="YouTube video player" frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen></iframe>
+  </div>`
+  )).join("");
+  sectionVideo.innerHTML = playerList;
 }
